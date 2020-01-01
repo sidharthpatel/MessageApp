@@ -7,23 +7,53 @@ import java.io.*;
 import java.awt.event.*;
 
 public class Server extends JFrame{
-	
-		private JTextField userText;
-		private JTextArea chatWindow;
-		private ObjectOutputStream output;
-		private ObjectInputStream input;
-		private ServerSocket server;
-		private Socket connection;
+
+	/*
+	 * Variable that will save the message before submitting it.
+ 	 */
+	private JTextField userText;
+	/**
+	 * JTextArea displays a window or an area that shows you the conversation.
+	 * It is the chat window of the program.
+	 */
+	private JTextArea chatWindow;
+	/**
+	 * A stream that flows from your computer/server to the client's computer.
+	 * These messages are passed between server and client in packages.
+	 * Output is messages sent out to the client.
+	 */
+	private ObjectOutputStream output;
+	/**
+	 * Similarly, a stream that flows from client's computer to the server/ your computer.
+	 * Input is the messages received from the client.
+	 */
+	private ObjectInputStream input;
+	/**
+	 * A server socket is a connection to which each client connects to.
+	 */
+	private ServerSocket server;
+	/**
+	 * Sockets are basically connections formed with the server.
+	 */
+	private Socket connection;
 		
-	//constructor	
+	//constructor
 	public Server() {
+		/**
+		 * Name of the program
+		 */
 		super("Instant Messenger");
+
 		userText = new JTextField();
+		/**
+		 * You cannot type anything in the message box until you are connected to a client.
+		 * That is what the setEditable method does.
+		 */
 		userText.setEditable(false);
 		userText.addActionListener(
 				new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-						sendMessage(e.getActionCommand());
+						//sendMessage(e.getActionCommand());
 						userText.setText("");
 					}
 				}
@@ -35,7 +65,7 @@ public class Server extends JFrame{
 		setVisible(true);
 		
 	}
-	
+
 	//set up and run the sever
 	public void startRunning() {
 		try {
